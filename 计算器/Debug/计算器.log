@@ -1,0 +1,6 @@
+﻿  calculator.c
+  main.c
+D:\代码\计算器\main.c(14,6): warning C4013: “gets”未定义；假设外部返回 int
+  正在生成代码...
+  LINK : 没有找到 D:\代码\计算器\Debug\计算器.exe 或上一个增量链接没有生成它；正在执行完全链接
+  计算器.vcxproj -> D:\代码\计算器\Debug\计算器.exe

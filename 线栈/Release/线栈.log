@@ -1,0 +1,8 @@
+﻿  main.c
+  SqStack.c
+D:\代码\线栈\SqStack.c(36,12): warning C4013: “gets”未定义；假设外部返回 int
+  Previous IPDB not found, fall back to full compilation.
+  正在生成代码
+  All 17 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  已完成代码的生成
+  线栈.vcxproj -> D:\代码\线栈\Release\线栈.exe
