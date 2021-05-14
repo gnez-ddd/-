@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改信息身份验证</title>
+    <script src="../../static/script/jquery-1.7.2.js"></script>
+    <script>
+        $(function () {
+            //发送邮箱验证码
+            $("#getCode").click(function () {
+                let email = $("#email").val();
+                let url = "/sendEmail";
+                //设置请求参数
+                let param = {"email":email};
+                //发送Ajax请求
+                $.post(url,param,function (res) {
+                    //将显示提示信息的span元素显示
+                    $("#msg").show();
+                    //将响应信息设置到span元素中
+                    $("#msg").html(res);
+                });
+            });
+            //给确认按钮绑定单击事件
+            $("#sub_btn").click(function () {
+                //获取验证码
+                let codeInput = $("#codeInput").val();
+                if(codeInput == ""){
+                    alert("验证码不能为空！")
+                    return false;
+                }
+            });
+            //将span标签隐藏
+            $("#msg").hide();
+            //通过Ajax请求验证验证码是否正确
+            //给输入验证码的文本框绑定change事件
+            $("#codeInput").change(function () {
+                //获取用户输入的验证码
+                let codeInput = $(this).val();
+                let email = $("#email").val();
+                //设置请求地址
+                let url = "/checkCode";
+                //设置请求参数
+                let param = {
+                    "codeInput":codeInput,
+                    "email":email
+                };
+                //发送Ajax请求
+                $.post(url,param,function (res) {
+                    //将显示提示信息的span元素显示
+                    $("msg").show();
+                    //将响应信息设置到span元素
+                    $("#msg").html(res);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <h1>身份验证</h1>
+        <span class="errorMsg" id="msg">{{.}}</span>
+    </div>
+    <a href="/index">首页</a>
+    <br/>
+    <br/>
+    <div>
+        <form action="/proveUser" method="post">
+            邮箱：
+            <input class="itxt" type="text" value={{.Email}} disabled="disabled" name="email" id="email"/>
+            <input type="button" value="发送验证码" id="getCode" />
+            <br/>
+            <br/>
+            验证码：
+            <input class="itxt" type="text" autocomplete="off" tabindex="1" name="codeInput" id="codeInput"/>
+            <br/>
+            <br/>
+            <br/>
+            <input type="submit" value="确认" id="sub_btn"/>
+        </form>
+    </div>
+</body>
+</html>
